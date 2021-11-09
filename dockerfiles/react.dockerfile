@@ -1,6 +1,6 @@
 FROM node:14-alpine as builder
 
-WORKDIR /var/www/html
+WORKDIR /app
 
 COPY app/package.json .
 
