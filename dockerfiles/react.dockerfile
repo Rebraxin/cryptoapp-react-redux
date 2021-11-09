@@ -10,6 +10,4 @@ COPY app/ .
 
 RUN npm run build
 
-WORKDIR /var/www/html
-
-COPY /app/build .
+COPY app/build /var/www/html
