@@ -12,4 +12,4 @@ RUN npm run build
 
 WORKDIR /var/www/html
 
-COPY app/build .
+COPY /app/build .
