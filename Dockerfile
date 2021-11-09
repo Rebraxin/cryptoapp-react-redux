@@ -1,21 +1,22 @@
-FROM node:14
+FROM node:14-alpine as builder
 
-ENV PORT 3000
+WORKDIR /app
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+COPY package.json .
 
-COPY package*.json /usr/src/app/
+RUN npm install
 
-RUN yarn install
+COPY . .
 
-COPY . /usr/src/app
+RUN npm run build
 
-RUN yarn build
+FROM nginx:stable-alpine
 
-EXPOSE 3000
+COPY --from=builder /app/build /usr/share/nginx/html
 
-CMD ["yarn", "start"]
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
 
 # docker build -f ./Dockerfile -t rebraxin/crypto-app-react . 
 # docker push rebraxin/crypto-app-react
