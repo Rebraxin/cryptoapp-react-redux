@@ -1,12 +1,12 @@
 FROM node:14-alpine as builder
 
-WORKDIR /app
+WORKDIR /var/www/html
 
-COPY package.json .
+COPY app/package.json .
 
 RUN npm install
 
-COPY . .
+COPY app/ .
 
 RUN npm run build
 
